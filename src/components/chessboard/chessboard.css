@@ -1,0 +1,26 @@
+/* src/components/Chessboard.css */
+.chessboard {
+    display: grid;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+    border: 2vh solid #4e4e4e;
+    width: 400px;
+    height: 400px;
+    box-shadow: 0.8vh 0.8vh 0.4vh #151515;
+}
+.PlayerInfo{
+    position: absolute;
+    top: 5vh;
+    left:50%;
+    transform:translate(-50%,-50%);
+    border:0.2vh solid black;
+    padding: 1vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: bisque;
+    box-shadow: 0.2vh 0.2vh 0.5vh;
+    
+}

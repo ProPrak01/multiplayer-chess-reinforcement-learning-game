@@ -1,0 +1,9 @@
+/* src/components/mouseFollower.css */
+.mouse-follower {
+  position: absolute;
+  pointer-events: none; /* Prevent the follower from blocking mouse events */
+  top:-50%;
+  left:-50%;
+  transform: translate(-90%, -90%); 
+  z-index: 1000; /* Ensure it stays on top */
+}

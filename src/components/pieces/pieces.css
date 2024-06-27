@@ -1,0 +1,70 @@
+.piece {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translate(15%,-10%);
+
+  }
+  
+  .black {
+    color: black;
+  }
+  
+  .white {
+    color: white;
+  }
+  
+  /* Pawn */
+  .piece-0::before {
+    content: '♟';
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
+  /* Rook */
+  .piece-1::before {
+    content: '♜';
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
+  /* Knight */
+  .piece-2::before {
+    content: '♞';
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
+  /* Bishop */
+  .piece-3::before {
+    content: '♝';
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
+  /* Queen */
+  .piece-4::before {
+    content: '♛';
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
+  /* King */
+  .piece-5::before {
+    content: '♚';
+    font-size: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+  }
+  
