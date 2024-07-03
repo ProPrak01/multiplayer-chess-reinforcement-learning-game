@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Initialize the state with an 8x8 grid, each cell containing { row, col, piece }
 const initialState = {
     list_elements: Array.from({ length: 8 }, (_, row) =>
-        Array.from({ length: 8 }, (_, col) => ({ row, col, piece: null }))
+        Array.from({ length: 8 }, (_, col) => ({ row, col, piece: null}))
     ),
 };
 

@@ -2,16 +2,30 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import Tile from '../tile/Tile';
 import './chessboard.css';
+import { updateValidElement } from '../../redux/validSlice';
 import { useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 function Chessboard({ reset_prop }) {
+    const dispatch = useDispatch();
     const [board, setBoard] = useState([]);
-    const [validMoves, setValidMoves] = useState([]);
+  //  const [validMoves, setValidMoves] = useState([]);
     const curr_user = useSelector((state) => state.currUsr);
     const currentDragPiece = useSelector((state) => state.dragPiece);
     const all_Elements = useSelector((state)=> state.allElements);
-    const getValidMoves = (piece, position, board)=>{
-        const validMoves = [];
+
+    const valid_Elements = useSelector((state)=> state.validElements);
+
+
+
+
+
+
+
+
+
+
+    const getValidPositions = (piece, position)=>{
+        const validPositions = [];
         const { row, col } = position;
         if (piece === null) {
             return validMoves;
@@ -38,10 +52,32 @@ function Chessboard({ reset_prop }) {
         
         
     }
-    const CheckValidPlaces = (piece, position) => {
-        const validMoves = getValidMoves(piece, position, board);
-        setValidMoves(validMoves);
+    const CheckValidPlaces = () => {
+
+        const this_row = currentDragPiece.initialPos.row;
+        const this_col = currentDragPiece.initialPos.col;
+        const this_pieceId = currentDragPiece.pieceId;
+        const this_color = currentDragPiece.color;
+        console.log("current checkings : ",currentDragPiece);
+        const valid_Positions = getValidPositions({ pieceId: this_pieceId, color: this_color }, { row: this_row, col: this_col });
+        // valid_Positions is and array of-> {row,col}
+            // for(let i = 0 ; i< 8;i++){
+            //     for(let j = 0 ; j< 8;j++){
+            //         if(valid_Positions.includes({row:i,col:j})){
+            //             dispatch(updateValidElement({row:i,col:j,valid:true}))
+            //         }
+            //     }
+            // }
+     //   setValidMoves(validMoves);
+
     };
+
+
+
+
+
+
+
 
     useEffect(() => {
         console.log(currentDragPiece);
@@ -84,8 +120,7 @@ function Chessboard({ reset_prop }) {
                             tileColor={tile.tileColor} 
                             
                             reset={reset_prop} 
-                            checkValid={() => CheckValidPlaces(currentDragPiece, { row: tile.row, col: tile.col })} 
-                            isValidMove={validMoves.some(move => move.row === tile.row && move.col === tile.col)}
+                            checkValidPlaces={CheckValidPlaces} 
                         />
                     )
                 )}
