@@ -6,7 +6,9 @@ import {  useDispatch } from 'react-redux';
 import { setDragPiece,resetDragPiece } from '../../redux/dragPieceSlice';
 import { useSelector } from 'react-redux';
 import { setCurrUsr } from '../../redux/currUsrSlice';
-const Tile = ({ row, col, tileColor,reset}) => {
+import { updateElement } from '../../redux/allElementSlice';
+
+const Tile = ({ row, col, tileColor,reset,checkValid,isValidMove}) => {
     const currentDragPiece = useSelector((state) => state.dragPiece);
     const curr_user = useSelector((state) => state.currUsr);
     const [piece,setPiece] = useState();
@@ -37,6 +39,7 @@ const Tile = ({ row, col, tileColor,reset}) => {
             setCurrent_piece(currentDragPiece);
             setPiece(<Pieces pieceId={currentDragPiece.pieceId} color={currentDragPiece.color}/>);
             dispatch(resetDragPiece());
+            dispatch(updateElement({ row, col, current_piece }));
             //dispatch(setCurrUsr(curr_user.curr_user))
             if(curr_user.curr_user == 0){
                 dispatch(setCurrUsr({curr_user:1}))
@@ -46,146 +49,181 @@ const Tile = ({ row, col, tileColor,reset}) => {
             }
             return
         }
+        
         dispatch(setDragPiece({pieceId:current_piece.pieceId,color:current_piece.color,row:row,col:col}))
         setPiece(null);
         setCurrent_piece({ pieceId: null, color: null });
+
+
+        dispatch(updateElement({ row, col, current_piece }));
+       // checkValid();
     }
     useEffect( () => {
         if(row == 0 && col == 0){
             setPiece(<Pieces pieceId={1} color={1}/>)
             setCurrent_piece({pieceId:1 , color:1})
+            dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 1){
             setPiece(<Pieces pieceId={2} color={1}/>)
             setCurrent_piece({pieceId:2 , color:1})
+            dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 2){
             setPiece(<Pieces pieceId={3} color={1}/>)
             setCurrent_piece({pieceId:3 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 3){
             setPiece(<Pieces pieceId={4} color={1}/>)
             setCurrent_piece({pieceId:4 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 4){
             setPiece(<Pieces pieceId={5} color={1}/>)
             setCurrent_piece({pieceId:5 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 5){
             setPiece(<Pieces pieceId={3} color={1}/>)
             setCurrent_piece({pieceId:3 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 6){
             setPiece(<Pieces pieceId={2} color={1}/>)
             setCurrent_piece({pieceId:2 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 0 && col == 7){
             setPiece(<Pieces pieceId={1} color={1}/>)
             setCurrent_piece({pieceId:1 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 0){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 1){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 2){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 3){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 4){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 5){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 6){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 1 && col == 7){
             setPiece(<Pieces pieceId={0} color={1}/>)
             setCurrent_piece({pieceId:0 , color:1})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 0){
             setPiece(<Pieces pieceId={1} color={0}/>)
             setCurrent_piece({pieceId:1 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 1){
             setPiece(<Pieces pieceId={2} color={0}/>)
             setCurrent_piece({pieceId:2 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 2){
             setPiece(<Pieces pieceId={3} color={0}/>)
             setCurrent_piece({pieceId:1 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 3){
             setPiece(<Pieces pieceId={4} color={0}/>)
             setCurrent_piece({pieceId:4 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 4){
             setPiece(<Pieces pieceId={5} color={0}/>)
             setCurrent_piece({pieceId:5 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 5){
             setPiece(<Pieces pieceId={3} color={0}/>)
             setCurrent_piece({pieceId:3 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 6){
             setPiece(<Pieces pieceId={2} color={0}/>)
             setCurrent_piece({pieceId:2 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 7 && col == 7){
             setPiece(<Pieces pieceId={1} color={0}/>)
             setCurrent_piece({pieceId:1 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 0){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 1){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 2){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+            dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 3){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 4){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 5){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 6){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
         else if(row == 6 && col == 7){
             setPiece(<Pieces pieceId={0} color={0}/>)
             setCurrent_piece({pieceId:0 , color:0})
+             dispatch(updateElement({ row, col, current_piece }));
         }
-        
-
     },[reset])
 
 
     return (
-        <div className={`tile ${tileColor}`} data-row={row} data-col={col} onClick={() => press()}>
+        <div className={`tile ${tileColor} ${isValidMove ? 'valid-move' : ''}`} data-row={row} data-col={col} onClick={() => press()}>
             
             {piece}
 
