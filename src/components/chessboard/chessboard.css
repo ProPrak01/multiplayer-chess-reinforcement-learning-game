@@ -7,7 +7,7 @@
     transform: translate(-50%, -50%);
     grid-template-columns: repeat(8, 50px);
     grid-template-rows: repeat(8, 50px);
-    border: 2vh solid #4e4e4e;
+    border: 2vh solid #76452b;
     width: 400px;
     height: 400px;
     box-shadow: 0.8vh 0.8vh 0.4vh #151515;
@@ -22,5 +22,23 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: bisque;
     box-shadow: 0.2vh 0.2vh 0.5vh;
-    
+    font-weight: bolder;
+}
+.killStore{
+    position: absolute;
+    left:50%;
+    transform: translate(-50%,0);
+    width: 420px;
+   height: 100px;  
+    background-color: #b58863;
+    border: 0.7vh solid #76452b;
+    box-shadow: 0.3vh 0.3vh 0.5vh;
+    display: flex;
+    flex-wrap: wrap;
+}
+.whiteK{
+    top:14%;
+}
+.blackK{
+    top:74.5%;
 }

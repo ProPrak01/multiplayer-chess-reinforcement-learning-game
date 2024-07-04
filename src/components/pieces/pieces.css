@@ -3,15 +3,25 @@
     height: 50px;
     position: absolute;
     transform: translate(15%,-10%);
-
+   
   }
   
   .black {
-    color: black;
+    color: rgb(68, 7, 7);
+    text-shadow:
+    -1px -1px 0 #f0f0f0,  
+     1px -1px 0 #d0d0d0,
+    -1px  1px 0 #c1c1c1,
+     1px  1px 0 #c4c4c4;
   }
   
   .white {
-    color: white;
+    color: rgb(221, 221, 221);
+    text-shadow:
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
   }
   
   /* Pawn */
@@ -30,6 +40,7 @@
     position: absolute;
     top: 5px;
     left: 5px;
+
   }
   
   /* Knight */

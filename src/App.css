@@ -1,6 +1,6 @@
 body{
 
-    background-color: rgb(187, 83, 51);
+    background-color: rgb(74, 20, 20);
     
 }
 .start-btn{
@@ -9,7 +9,7 @@ body{
     left: 50%;
     transform: translate(-50%,-50%);
     padding:2vh 6vh;
-    border: 0.3rem solid brown;
+    border: 0.3rem solid rgb(28, 28, 79);
     color:brown;
     font-size: 3vh;
     background-color: rgb(244, 207, 151);

@@ -13,12 +13,13 @@ const validElementSlice = createSlice({
             const { row, col, valid } = action.payload;
             state.valid_elements[row][col] = { valid };
         },
+        resetAllValid: (state) => {
+            state.valid_elements = state.valid_elements.map(row =>
+                row.map(col => ({ valid: false }))
+            );
+        },
     },
-    resetAllValid: (state) => {
-        state.valid_elements = state.valid_elements.map(row =>
-            row.map(col => ({ valid: false }))
-        );
-    },
+  
 });
 export const { updateValidElement ,resetAllValid} = validElementSlice.actions;
 export default validElementSlice.reducer;

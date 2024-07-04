@@ -28,10 +28,7 @@
     background-color: rgba(0, 255, 0, 0.5);
 }
 .kill-move {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    border-radius: 50%;
+    
     background-color: rgba(255, 13, 0, 0.5);
 }
 

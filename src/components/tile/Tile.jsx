@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 import { setCurrUsr } from '../../redux/currUsrSlice';
 import { updateElement } from '../../redux/allElementSlice';
 import { updateValidElement,resetAllValid } from '../../redux/validSlice';
-
-const Tile = ({ row, col, tileColor,reset,checkValidPlaces}) => {
+import { updateKilledElement } from '../../redux/killedSlice';
+const Tile = ({ row, col, tileColor,reset,checkValidPlaces,GameOver}) => {
     const currentDragPiece = useSelector((state) => state.dragPiece);
     const curr_user = useSelector((state) => state.currUsr);
     const valid_Elements = useSelector((state)=> state.validElements.valid_elements);
@@ -27,11 +27,33 @@ const Tile = ({ row, col, tileColor,reset,checkValidPlaces}) => {
             negativeAnimation();
             return
         }
-        if(current_piece.pieceId != null && currentDragPiece.pieceId != null)
+        if(current_piece.pieceId != null && currentDragPiece.pieceId != null && current_piece.color == currentDragPiece.color)
         {
             negativeAnimation();
             return
         }
+        //killing script:  
+        if(current_piece.pieceId != null && currentDragPiece.pieceId != null && current_piece.color != currentDragPiece.color)
+            {
+                if(current_piece.pieceId == 5){
+                    GameOver(); 
+                    return;
+                 }
+                dispatch(updateKilledElement({pieceId: current_piece.pieceId, color: current_piece.color}))
+                setCurrent_piece(currentDragPiece);
+                setPiece(<Pieces pieceId={currentDragPiece.pieceId} color={currentDragPiece.color}/>);
+                dispatch(updateElement({ row, col, piece: { pieceId: currentDragPiece.pieceId, color: currentDragPiece.color} }));
+                dispatch(resetDragPiece());
+                dispatch(resetAllValid());
+                
+                if(curr_user.curr_user == 0){
+                    dispatch(setCurrUsr({curr_user:1}))
+                }
+                else{
+                    dispatch(setCurrUsr({curr_user:0}))
+                }
+
+            }
         
         if(current_piece.color != null &&  current_piece.color != curr_user.curr_user)
         {
@@ -40,30 +62,50 @@ const Tile = ({ row, col, tileColor,reset,checkValidPlaces}) => {
        
         
         if(current_piece.pieceId ==null && currentDragPiece.pieceId != null &&  valid_Elements[row][col].valid){
+            // console.log("checking looser : ", currentDragPiece.initialPos.row ,currentDragPiece.initialPos.col   )
+            // console.log("checking boozer : ", row ,col   )
+            let same_place_trigger = false;
+            if(currentDragPiece.initialPos.row == row && currentDragPiece.initialPos.col == col){
+                same_place_trigger = true;
+            }
+            
             setCurrent_piece(currentDragPiece);
             setPiece(<Pieces pieceId={currentDragPiece.pieceId} color={currentDragPiece.color}/>);
             dispatch(updateElement({ row, col, piece: { pieceId: currentDragPiece.pieceId, color: currentDragPiece.color} }));
             dispatch(resetDragPiece());
             dispatch(resetAllValid()); 
             //dispatch(setCurrUsr(curr_user.curr_user))
-            if(curr_user.curr_user == 0){
-                dispatch(setCurrUsr({curr_user:1}))
-            }
-            else{
-                dispatch(setCurrUsr({curr_user:0}))
-            }
+                if(!same_place_trigger){
+                    if(curr_user.curr_user == 0){
+                        dispatch(setCurrUsr({curr_user:1}))
+                    }
+                    else{
+                        dispatch(setCurrUsr({curr_user:0}))
+                    }
+                }
+             
+            
+           
             return
         }
+        if(current_piece.pieceId ==null && currentDragPiece.pieceId != null &&  valid_Elements[row][col].valid == false){
+            return;
+        }
+
         
         dispatch(setDragPiece({pieceId:current_piece.pieceId,color:current_piece.color,row:row,col:col}))
+        console.log("checking values :", row,col,current_piece.pieceId,current_piece.color )
+        checkValidPlaces(row,col,current_piece.pieceId,current_piece.color);
+        dispatch(updateValidElement({row:row,col:col,valid:true}))
+
         setPiece(null);
         setCurrent_piece({ pieceId: null, color: null });
 
 
         dispatch(updateElement({ row, col,  piece: null}));
-        dispatch(updateValidElement({row:row,col:col,valid:true}))
+        
+        console.log(valid_Elements)
 
-        checkValidPlaces();
        
     }
     useEffect( () => {
@@ -158,9 +200,9 @@ const Tile = ({ row, col, tileColor,reset,checkValidPlaces}) => {
              dispatch(updateElement({ row, col, piece:{pieceId:2 , color:0}  }));
         }
         else if(row == 7 && col == 2){
-            setPiece(<Pieces pieceId={3} color={0}/>)
-            setCurrent_piece({pieceId:1 , color:0})
-             dispatch(updateElement({ row, col, piece:{pieceId:1 , color:0} }));
+             setPiece(<Pieces pieceId={3} color={0}/>)
+            setCurrent_piece({pieceId:3 , color:0})
+             dispatch(updateElement({ row, col, piece:{pieceId:3 , color:0}  }));
         }
         else if(row == 7 && col == 3){
             setPiece(<Pieces pieceId={4} color={0}/>)
@@ -232,9 +274,8 @@ const Tile = ({ row, col, tileColor,reset,checkValidPlaces}) => {
 
     return (
         <div className={`tile ${tileColor} `} data-row={row} data-col={col} onClick={() => press()}>
-            {/* ${isValidMove ? 'valid-move' : ''} */}
             {
-                valid_Elements[row][col].valid && <div className='valid-move'></div>
+                valid_Elements[row][col].valid && <div className={`valid-move ${(current_piece.color==0||current_piece.color==1) && curr_user.curr_user != current_piece.color ? 'kill-move' : ''}`}></div>
             }
             {piece}
             {/* <Pieces pieceId={1} color={1}/> */}
