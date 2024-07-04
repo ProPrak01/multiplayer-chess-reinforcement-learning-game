@@ -9,9 +9,12 @@ const currUsrSlice = createSlice({
         setCurrUsr:(state,action)=>{
             state.curr_user = action.payload.curr_user
         },
+        resetCurrUsr:(state)=>{
+            state.curr_user = 0;
+        }
        
     },
 });
 
-export const {setCurrUsr} = currUsrSlice.actions;
+export const {setCurrUsr,resetCurrUsr} = currUsrSlice.actions;
 export default currUsrSlice.reducer;

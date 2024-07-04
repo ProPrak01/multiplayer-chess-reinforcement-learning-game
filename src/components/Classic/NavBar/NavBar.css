@@ -1,0 +1,26 @@
+/* nav css->  */
+.nav{
+    
+    justify-content: sp;
+    align-items: center;
+    background-color: #FF6969;
+    width: 100%;
+    align-content: center;
+    padding: 1vh;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.btn{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 60
+}
+.group-ls{
+    display: flex;
+    
+}

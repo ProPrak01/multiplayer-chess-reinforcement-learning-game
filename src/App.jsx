@@ -1,39 +1,25 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from 'react'
 import './App.css'
-import Chessboard from './components/chessboard/chessboard'
-import MouseFollower from './components/mouseFollower/mouseFollower'
-import { useSelector } from 'react-redux';
+
+import NavBar from './components/Classic/NavBar/NavBar'
+import HomeScreen from './pages/HomeScreen/HomeScreen';
+import GameScene from './pages/Game/GameScene';
+import NoPage from './pages/NoPageFound/NoPage';
 
 function App() {
-  const [start, setStart] = useState(false);
-  const [rerender, set_Rerender] = useState(0);
-  const all_Elements = useSelector((state) => state.allElements);
-  const quit = () => {
-    setStart(false);
-  }
-  const reset = () => {
-    set_Rerender(rerender + 1);
-  }
-  const GetAllElements = () => {
-    console.log(all_Elements);
-  }
-
+  
   return (
-    <div>
-      {
-        start ? (
-          <Chessboard reset_prop={rerender} />
-        )
-          : <button className='start-btn' onClick={() => setStart(true)}>START</button>
-      }
-
-      <MouseFollower />
-      {/* <button className='reset-btn' onClick={reset}>RESET</button> */}
-      {start && <button style={{ position: 'absolute', bottom: '0', left: '0' }} className='quit-btn' onClick={quit}>QUIT</button>}
-      {start && <button style={{ position: 'absolute', bottom: '0', right: '0' }} className='quit-btn' onClick={GetAllElements}>Get All Elements</button>}
-    </div>
-
+    <BrowserRouter>
+  <Routes>
+        <Route path="/" element={<NavBar />}>
+          <Route index element={<HomeScreen />} />
+          <Route path="GameScene" element={<GameScene />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
 
   )
 }

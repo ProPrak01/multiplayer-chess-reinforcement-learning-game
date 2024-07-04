@@ -46,35 +46,45 @@ function Chessboard({ reset_prop }) {
                 return;
             }
             else {
-                console.log("w")
+               
                 validPositions.push({ row: row, col: col })
             }
         }
 
         if (piece.pieceId == 0) {
             if (piece.color == 0) {
-                console.log("a")
+                if(row == 6){
+                    if(all_Elements.list_elements[row-2][col].piece == null && all_Elements.list_elements[row-1][col].piece == null ){
+                        addMove(row-2,col);
+                    }
+                }
+               
                 if(all_Elements.list_elements[row-1][col].piece == null){
                     addMove(row - 1, col);
                 }
                
-                if(all_Elements.list_elements[row-1][col-1].piece != null){
+                if(col>= 1 && all_Elements.list_elements[row-1][col-1].piece != null){
                     addMove(row - 1, col-1);
                 }
-                if(all_Elements.list_elements[row-1][col+1].piece != null){
+                if(col<= 6 && all_Elements.list_elements[row-1][col+1].piece != null){
                     addMove(row - 1, col+1);
                 }
 
             }
             else {
+                if(row == 1){
+                    if(all_Elements.list_elements[row+2][col].piece == null && all_Elements.list_elements[row+1][col].piece == null ){
+                        addMove(row+2,col);
+                    }
+                }
                 console.log("a")
                 if(all_Elements.list_elements[row+1][col].piece == null){
                     addMove(row + 1, col);
                 }
-                if(all_Elements.list_elements[row+1][col-1].piece != null){
+                if(col>= 1 && all_Elements.list_elements[row+1][col-1].piece != null){
                     addMove(row + 1, col-1);
                 }
-                if(all_Elements.list_elements[row+1][col+1].piece != null){
+                if(col<= 6 && all_Elements.list_elements[row+1][col+1].piece != null){
                     addMove(row + 1, col+1);
                 }
             }

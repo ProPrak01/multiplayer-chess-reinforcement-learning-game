@@ -19,8 +19,11 @@ const killedElements = createSlice({
                 state.killed_elements.black.push({ pieceId, color });
             }
         },
+        resetKilledSlice: (state) => {
+            state.killed_elements = initialState.killed_elements;
+        },
     },
 });
 
-export const { updateKilledElement } = killedElements.actions;
+export const { updateKilledElement ,resetKilledSlice} = killedElements.actions;
 export default killedElements.reducer;

@@ -33,7 +33,7 @@ const Tile = ({ row, col, tileColor,reset,checkValidPlaces,GameOver}) => {
             return
         }
         //killing script:  
-        if(current_piece.pieceId != null && currentDragPiece.pieceId != null && current_piece.color != currentDragPiece.color)
+        if(current_piece.pieceId != null && currentDragPiece.pieceId != null && current_piece.color != currentDragPiece.color && valid_Elements[row][col].valid)
             {
                 if(current_piece.pieceId == 5){
                     GameOver(); 
