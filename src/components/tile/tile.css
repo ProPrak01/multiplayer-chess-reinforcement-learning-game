@@ -9,11 +9,11 @@
 }
 
 .white-tile {
-    background-color: #f0d9b5;
+    background-color: #ffffff;
 }
 
 .black-tile {
-    background-color: #b58863;
+    background-color: #898989;
 }
 
 .tile:hover {

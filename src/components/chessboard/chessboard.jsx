@@ -372,6 +372,7 @@ function Chessboard({ reset_prop }) {
                     return   <div className={`piece ${element.color === 0 ? 'black' : 'white'} piece-${element.pieceId}` } style={{position:'relative'}} key={index}></div>
                 })
             }
+            
             </div>
         </>
     );

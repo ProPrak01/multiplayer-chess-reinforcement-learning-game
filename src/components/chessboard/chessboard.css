@@ -1,5 +1,7 @@
 /* src/components/Chessboard.css */
 .chessboard {
+    border: 1.5vh solid rgb(18,24,38);
+    border-radius: 6px;
     display: grid;
     position: absolute;
     top: 50%;
@@ -7,20 +9,21 @@
     transform: translate(-50%, -50%);
     grid-template-columns: repeat(8, 50px);
     grid-template-rows: repeat(8, 50px);
-    
+   
     width: 400px;
     height: 400px;
-    box-shadow: 0.8vh 0.8vh 0.4vh #151515;
+  
+    box-sizing: content-box;
 }
 .PlayerInfo{
     position: absolute;
     bottom: 0;
     left:50%;
     transform:translate(-50%,-50%);
-    border:0.2vh solid black;
+    border:0.4vh solid black;
     padding: 1vh;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: bisque;
+    background-color: rgb(49, 111, 198);
     box-shadow: 0.2vh 0.2vh 0.5vh;
     font-weight: bolder;
 }
@@ -28,11 +31,12 @@
     position: absolute;
     left:50%;
     transform: translate(-50%,0);
-    width: 420px;
-   height: 100px;  
-    background-color: #b58863;
-    border: 0.7vh solid #76452b;
-    box-shadow: 0.3vh 0.3vh 0.5vh;
+    width: 430px;
+    height: fit-content;  
+    min-height: 60px;
+    background-color: #233162;
+    border: 0.7vh solid rgb(18,24,38);
+    /* box-shadow: 0.3vh 0.3vh 0.5vh; */
     display: flex;
     flex-wrap: wrap;
 }
