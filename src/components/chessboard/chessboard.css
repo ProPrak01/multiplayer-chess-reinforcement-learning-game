@@ -7,7 +7,7 @@
     transform: translate(-50%, -50%);
     grid-template-columns: repeat(8, 50px);
     grid-template-rows: repeat(8, 50px);
-    border: 2vh solid #76452b;
+    
     width: 400px;
     height: 400px;
     box-shadow: 0.8vh 0.8vh 0.4vh #151515;
