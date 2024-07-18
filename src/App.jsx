@@ -11,6 +11,7 @@ import Login from "./pages/auth/Login/Login";
 import Signup from "./pages/auth/SignUp/SignUp";
 import OnlineGameScene from "./pages/online/OnlineGame";
 import GameSelector from "./pages/Game/GameSelector";
+import About from "./pages/about/About"
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +27,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="*" element={<NoPage />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </BrowserRouter>
