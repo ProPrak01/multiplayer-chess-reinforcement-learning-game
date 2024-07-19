@@ -1,29 +1,34 @@
-import { useState, useEffect } from "react";
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import OnlineChessboard from "../../components/chessboard/OnlineChessboard";
 import MouseFollower from "../../components/mouseFollower/mouseFollower";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { resetAllValid } from "../../redux/validSlice";
 import { resetDragPiece } from "../../redux/dragPieceSlice";
 import { resetCurrUsr } from "../../redux/currUsrSlice";
 import { resetKilledSlice } from "../../redux/killedSlice";
 import { resetElement } from "../../redux/allElementSlice";
+import socket from "../../socket/socketService.js"; // Adjust path as needed
 
 function OnlineGameScene() {
   const [start, setStart] = useState(false);
   const [rerender, set_Rerender] = useState(0);
-  const all_Elements = useSelector((state) => state.allElements);
+  const location = useLocation();
+  const roomName = new URLSearchParams(location.search).get("roomName");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (roomName) {
+      setStart(true);
+      socket.emit("joinRoom", roomName);
+    }
+  }, [roomName]);
+
   const quit = () => {
     setStart(false);
   };
+
   const reset = () => {
-    set_Rerender(rerender + 1);
-  };
-  const startGame = () => {
-    setStart(true);
     set_Rerender(rerender + 1);
     dispatch(resetDragPiece());
     dispatch(resetAllValid());
@@ -31,18 +36,19 @@ function OnlineGameScene() {
     dispatch(resetKilledSlice());
     dispatch(resetElement());
   };
+
   const GetAllElements = () => {
-    console.log(all_Elements);
+    console.log("All elements logged");
   };
 
   return (
-    <div>
+    <div className="h-screen flex flex-col items-center justify-center">
       {start ? (
-        <OnlineChessboard reset_prop={rerender} />
+        <OnlineChessboard roomName={roomName} reset_prop={rerender} />
       ) : (
         <div className="absolute top-[40%] left-[50%] translate-x-[-50%]">
           <button
-            onClick={startGame}
+            onClick={() => setStart(true)}
             className="relative inline-block text-lg group"
           >
             <span className="relative z-10 block px-9 py-5 overflow-hidden font-medium leading-tight text-gray-800 transition-colors duration-300 ease-out border-2 border-gray-900 rounded-lg group-hover:text-white">
@@ -59,24 +65,23 @@ function OnlineGameScene() {
       )}
 
       <MouseFollower />
-      {/* <button className='reset-btn' onClick={reset}>RESET</button> */}
       {start && (
-        <button
-          style={{ position: "absolute", bottom: "0", left: "0" }}
-          className="quit-btn"
-          onClick={quit}
-        >
-          QUIT
-        </button>
-      )}
-      {start && (
-        <button
-          style={{ position: "absolute", bottom: "0", right: "0" }}
-          className="quit-btn"
-          onClick={GetAllElements}
-        >
-          Get All Elements
-        </button>
+        <>
+          <button
+            style={{ position: "absolute", bottom: "0", left: "0" }}
+            className="quit-btn"
+            onClick={quit}
+          >
+            QUIT
+          </button>
+          <button
+            style={{ position: "absolute", bottom: "0", right: "0" }}
+            className="quit-btn"
+            onClick={GetAllElements}
+          >
+            Get All Elements
+          </button>
+        </>
       )}
     </div>
   );

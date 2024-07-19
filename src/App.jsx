@@ -11,7 +11,8 @@ import Login from "./pages/auth/Login/Login";
 import Signup from "./pages/auth/SignUp/SignUp";
 import OnlineGameScene from "./pages/online/OnlineGame";
 import GameSelector from "./pages/Game/GameSelector";
-import About from "./pages/about/About"
+import About from "./pages/about/About";
+import RoomSelection from "./pages/online/RoomSelection";
 function App() {
   return (
     <BrowserRouter>
@@ -23,11 +24,16 @@ function App() {
             element={<ProtectedRoute element={<GameScene />} />}
           />
           <Route path="GameSelector" element={<GameSelector />} />
+
           <Route path="OnlineGame" element={<OnlineGameScene />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="*" element={<NoPage />} />
           <Route path="about" element={<About />} />
+          <Route
+            path="/roomSelect"
+            element={<ProtectedRoute element={<RoomSelection />} />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>

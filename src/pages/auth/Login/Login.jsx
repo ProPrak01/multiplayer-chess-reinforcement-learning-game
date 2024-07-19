@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const { dispatch } = useAuth();
 
@@ -14,34 +14,35 @@ const Login = () => {
     e.preventDefault(); // Prevent form submission reload
 
     try {
-      console.log('Logging in...');
-      const response = await fetch('https://chess-backend0.vercel.app/api/login', {
-        method: 'POST',
+      console.log("Logging in...");
+      // const response = await fetch('https://chess-backend0.vercel.app/api/login', {
+      const response = await fetch("http://localhost:5001/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(credentials),
       });
 
       if (!response.ok) {
         // Handle non-successful response (like 400 or 500 errors)
-        console.error('Login failed:', response.statusText);
+        console.error("Login failed:", response.statusText);
         return;
       }
 
-      console.log('Login successful');
+      console.log("Login successful");
       const data = await response.json();
       console.log(data);
 
       const { email, token } = data;
       const user = { email: email };
-      dispatch({ type: 'LOGIN', payload: { user, token } });
-      navigate('/');
+      dispatch({ type: "LOGIN", payload: { user, token } });
+      navigate("/");
 
-      console.log('Login successful');
+      console.log("Login successful");
     } catch (error) {
       // Handle network errors or exceptions
-      console.error('Login error:', error);
+      console.error("Login error:", error);
     }
   };
 
@@ -53,7 +54,9 @@ const Login = () => {
           <input
             type="email"
             value={credentials.email}
-            onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+            onChange={(e) =>
+              setCredentials({ ...credentials, email: e.target.value })
+            }
             placeholder="Email"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
@@ -61,7 +64,9 @@ const Login = () => {
           <input
             type="password"
             value={credentials.password}
-            onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+            onChange={(e) =>
+              setCredentials({ ...credentials, password: e.target.value })
+            }
             placeholder="Password"
             required
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
@@ -75,7 +80,7 @@ const Login = () => {
         </form>
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <Link to="/Signup" className="text-blue-500 hover:underline">
               Sign up here
             </Link>
